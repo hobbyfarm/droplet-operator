@@ -1,0 +1,13 @@
+apiVersion: droplet.cattle.io/v1alpha1
+kind: Instance
+metadata:
+  name: instance-sample
+spec:
+  # Add fields here
+  name: sample
+  secret: do-secret
+  region: nyc3
+  size: s-1vcpu-1gb
+  image: 
+    slug: ubuntu-20-04-x64
+
