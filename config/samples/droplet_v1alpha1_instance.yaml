@@ -10,4 +10,7 @@ spec:
   size: s-1vcpu-1gb
   image: 
     slug: ubuntu-20-04-x64
+  ssh_keys:
+  - id: 30236996
+    fingerprint: '26:90:37:75:f7:dd:d6:43:e9:76:0b:61:3d:83:fd:33'
 

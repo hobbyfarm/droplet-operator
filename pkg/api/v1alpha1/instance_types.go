@@ -26,7 +26,7 @@ import (
 
 // InstanceSpec defines the desired state of Instance and is a wrapper around DropletCreateRequest
 type InstanceSpec struct {
-	Secret            *string               `json:"secret"`
+	Secret            string                `json:"secret"`
 	Name              string                `json:"name"`
 	Region            string                `json:"region"`
 	Size              string                `json:"size"`
@@ -36,10 +36,10 @@ type InstanceSpec struct {
 	IPv6              bool                  `json:"ipv6,omitempty"`
 	PrivateNetworking bool                  `json:"private_networking,omitempty"`
 	Monitoring        bool                  `json:"monitoring,omitempty"`
-	UserData          string                `json:"user_data,omitempty,omitempty"`
-	Volumes           []DropletCreateVolume `json:"volumes,omitempty,omitempty"`
+	UserData          string                `json:"user_data,omitempty"`
+	Volumes           []DropletCreateVolume `json:"volumes,omitempty"`
 	Tags              []string              `json:"tags,omitempty"`
-	VPCUUID           string                `json:"vpc_uuid,omitempty,omitempty"`
+	VPCUUID           string                `json:"vpc_uuid,omitempty"`
 }
 
 type DropletCreateImage struct {

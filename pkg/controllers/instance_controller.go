@@ -59,7 +59,8 @@ func (r *InstanceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
-	secret, err := r.secretExists(ctx, instance)
+	nsSecretName := types.NamespacedName{Namespace: instance.Namespace, Name: instance.Spec.Secret}
+	secret, err := secretExists(r.Client, ctx, nsSecretName)
 	if err != nil {
 		return ctrl.Result{}, err
 	}
@@ -85,6 +86,7 @@ func (r *InstanceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 		}
 
 		if err != nil {
+			log.Error(err, "")
 			status.Message = err.Error()
 		}
 		instance.Status = *status
@@ -94,11 +96,11 @@ func (r *InstanceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 		// clean up instance
 		if controllerutil.ContainsFinalizer(instance, Finalizer) {
 			log.Info("Terminating instance")
+			err = doClient.DeleteInstance(ctx, instance)
+			if err != nil {
+				return ctrl.Result{}, err
+			}
 			controllerutil.RemoveFinalizer(instance, Finalizer)
-		}
-		err = doClient.DeleteInstance(ctx, instance)
-		if err != nil {
-			return ctrl.Result{}, err
 		}
 	}
 	return ctrl.Result{Requeue: requeue}, r.Update(ctx, instance)
@@ -110,8 +112,8 @@ func (r *InstanceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 		Complete(r)
 }
 
-func (r *InstanceReconciler) secretExists(ctx context.Context, instance *dropletv1alpha1.Instance) (secret *corev1.Secret, err error) {
+func secretExists(c client.Client, ctx context.Context, nsName types.NamespacedName) (secret *corev1.Secret, err error) {
 	secret = &corev1.Secret{}
-	err = r.Get(ctx, types.NamespacedName{Namespace: instance.Namespace, Name: *instance.Spec.Secret}, secret)
+	err = c.Get(ctx, nsName, secret)
 	return secret, err
 }
