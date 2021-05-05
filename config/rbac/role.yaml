@@ -9,6 +9,26 @@ rules:
 - apiGroups:
   - droplet.cattle.io
   resources:
+  - importkeypairs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - droplet.cattle.io
+  resources:
+  - importkeypairs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - droplet.cattle.io
+  resources:
   - instances
   verbs:
   - create

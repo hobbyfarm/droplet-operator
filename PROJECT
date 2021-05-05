@@ -4,4 +4,7 @@ resources:
 - group: droplet
   kind: Instance
   version: v1alpha1
+- group: droplet
+  kind: ImportKeyPair
+  version: v1alpha1
 version: "2"

@@ -1,0 +1,8 @@
+apiVersion: droplet.cattle.io/v1alpha1
+kind: ImportKeyPair
+metadata:
+  name: key-sample
+spec:
+  # Add fields here
+  secret: do-secret
+  publicKey: "yourkey"
