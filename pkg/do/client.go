@@ -48,7 +48,7 @@ func (c *DOClient) CreateDroplet(ctx context.Context, instance *dropletv1alpha1.
 	if !ok && status.InstanceID == 0 {
 		droplet, _, err = c.Droplets.Create(ctx, request)
 		if err != nil {
-			return nil, err
+			return status, err
 		}
 	}
 
