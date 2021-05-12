@@ -7,7 +7,6 @@ import (
 
 	"github.com/digitalocean/godo"
 	dropletv1alpha1 "github.com/ibrokethecloud/droplet-operator/pkg/api/v1alpha1"
-	"github.com/sirupsen/logrus"
 	corev1 "k8s.io/api/core/v1"
 )
 
@@ -49,11 +48,10 @@ func (c *DOClient) CreateDroplet(ctx context.Context, instance *dropletv1alpha1.
 	if !ok && status.InstanceID == 0 {
 		droplet, _, err = c.Droplets.Create(ctx, request)
 		if err != nil {
-			return nil, err
+			return status, err
 		}
 	}
 
-	logrus.Info(droplet.ID)
 	availableLabels["requestSubmitted"] = "true"
 	instance.SetLabels(availableLabels)
 	status.Status = Submitted
