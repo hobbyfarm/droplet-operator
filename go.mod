@@ -1,4 +1,4 @@
-module github.com/ibrokethecloud/droplet-operator
+module github.com/hobbyfarm/droplet-operator
 
 go 1.13
 
@@ -13,7 +13,7 @@ require (
 	github.com/gophercloud/gophercloud v0.1.0 // indirect
 	github.com/onsi/ginkgo v1.14.1
 	github.com/onsi/gomega v1.10.2
-	github.com/sirupsen/logrus v1.6.0
+	github.com/sirupsen/logrus v1.6.0 // indirect
 	github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8 // indirect
 	github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77 // indirect
 	gonum.org/v1/netlib v0.0.0-20190331212654-76723241ea4e // indirect

@@ -26,8 +26,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	dropletv1alpha1 "github.com/ibrokethecloud/droplet-operator/pkg/api/v1alpha1"
-	"github.com/ibrokethecloud/droplet-operator/pkg/controllers"
+	dropletv1alpha1 "github.com/hobbyfarm/droplet-operator/pkg/api/v1alpha1"
+	"github.com/hobbyfarm/droplet-operator/pkg/controllers"
 	// +kubebuilder:scaffold:imports
 )
 

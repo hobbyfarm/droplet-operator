@@ -27,8 +27,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	dropletv1alpha1 "github.com/ibrokethecloud/droplet-operator/pkg/api/v1alpha1"
-	"github.com/ibrokethecloud/droplet-operator/pkg/do"
+	dropletv1alpha1 "github.com/hobbyfarm/droplet-operator/pkg/api/v1alpha1"
+	"github.com/hobbyfarm/droplet-operator/pkg/do"
 	corev1 "k8s.io/api/core/v1"
 )
 

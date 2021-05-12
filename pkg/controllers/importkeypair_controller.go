@@ -29,8 +29,8 @@ import (
 
 	"context"
 
-	dropletv1alpha1 "github.com/ibrokethecloud/droplet-operator/pkg/api/v1alpha1"
-	"github.com/ibrokethecloud/droplet-operator/pkg/do"
+	dropletv1alpha1 "github.com/hobbyfarm/droplet-operator/pkg/api/v1alpha1"
+	"github.com/hobbyfarm/droplet-operator/pkg/do"
 )
 
 // ImportKeyPairReconciler reconciles a ImportKeyPair object

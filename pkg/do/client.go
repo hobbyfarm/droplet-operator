@@ -6,7 +6,7 @@ import (
 	"net"
 
 	"github.com/digitalocean/godo"
-	dropletv1alpha1 "github.com/ibrokethecloud/droplet-operator/pkg/api/v1alpha1"
+	dropletv1alpha1 "github.com/hobbyfarm/droplet-operator/pkg/api/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 )
 
