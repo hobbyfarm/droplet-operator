@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  droplet-operator:
+  - apiVersion: v2
+    appVersion: v0.1.2-rc2
+    created: "2021-10-18T03:56:52.39428371Z"
+    description: A Helm chart for Kubernetes
+    digest: da8e094e60787471b1770d6af4d5340c391c2895dfaaacb00c957112843397a4
+    name: droplet-operator
+    urls:
+    - https://github.com/hobbyfarm/droplet-operator/releases/download/droplet-operator-v0.1.2-rc2/droplet-operator-v0.1.2-rc2.tgz
+    version: v0.1.2-rc2
+generated: "2021-10-18T03:56:52.166681256Z"
