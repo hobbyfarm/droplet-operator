@@ -1,6 +1,6 @@
 
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
@@ -8,19 +8,6 @@ metadata:
   creationTimestamp: null
   name: instances.droplet.cattle.io
 spec:
-  additionalPrinterColumns:
-  - JSONPath: .status.instanceID
-    name: InstanceId
-    type: string
-  - JSONPath: .status.publicIP
-    name: PublicIP
-    type: string
-  - JSONPath: .status.privateIP
-    name: PrivateIP
-    type: string
-  - JSONPath: .status.status
-    name: Status
-    type: string
   group: droplet.cattle.io
   names:
     kind: Instance
@@ -28,111 +15,123 @@ spec:
     plural: instances
     singular: instance
   scope: Namespaced
-  subresources: {}
-  validation:
-    openAPIV3Schema:
-      description: Instance is the Schema for the instances API
-      properties:
-        apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
-            of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-          type: string
-        kind:
-          description: 'Kind is a string value representing the REST resource this
-            object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-          type: string
-        metadata:
-          type: object
-        spec:
-          description: InstanceSpec defines the desired state of Instance and is a
-            wrapper around DropletCreateRequest
-          properties:
-            backups:
-              type: boolean
-            image:
-              properties:
-                id:
-                  type: integer
-                slug:
-                  type: string
-              type: object
-            ipv6:
-              type: boolean
-            monitoring:
-              type: boolean
-            name:
-              type: string
-            private_networking:
-              type: boolean
-            region:
-              type: string
-            secret:
-              type: string
-            size:
-              type: string
-            ssh_keys:
-              items:
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.instanceID
+      name: InstanceId
+      type: string
+    - jsonPath: .status.publicIP
+      name: PublicIP
+      type: string
+    - jsonPath: .status.privateIP
+      name: PrivateIP
+      type: string
+    - jsonPath: .status.status
+      name: Status
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Instance is the Schema for the instances API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: InstanceSpec defines the desired state of Instance and is
+              a wrapper around DropletCreateRequest
+            properties:
+              backups:
+                type: boolean
+              image:
                 properties:
-                  fingerprint:
-                    type: string
                   id:
                     type: integer
+                  slug:
+                    type: string
                 type: object
-              type: array
-            tags:
-              items:
+              ipv6:
+                type: boolean
+              monitoring:
+                type: boolean
+              name:
                 type: string
-              type: array
-            user_data:
-              type: string
-            volumes:
-              items:
-                properties:
-                  id:
-                    type: string
-                  name:
-                    description: 'Deprecated: You must pass a the volume''s ID when
-                      creating a Droplet.'
-                    type: string
-                type: object
-              type: array
-            vpc_uuid:
-              type: string
-          required:
-          - image
-          - name
-          - region
-          - secret
-          - size
-          type: object
-        status:
-          description: InstanceStatus defines the observed state of Instance
-          properties:
-            instanceID:
-              type: integer
-            message:
-              type: string
-            privateIP:
-              type: string
-            publicIP:
-              type: string
-            status:
-              type: string
-          required:
-          - instanceID
-          - message
-          - privateIP
-          - publicIP
-          - status
-          type: object
-      type: object
-  version: v1alpha1
-  versions:
-  - name: v1alpha1
+              private_networking:
+                type: boolean
+              region:
+                type: string
+              secret:
+                type: string
+              size:
+                type: string
+              ssh_keys:
+                items:
+                  properties:
+                    fingerprint:
+                      type: string
+                    id:
+                      type: integer
+                  type: object
+                type: array
+              tags:
+                items:
+                  type: string
+                type: array
+              user_data:
+                type: string
+              volumes:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      description: 'Deprecated: You must pass a the volume''s ID when
+                        creating a Droplet.'
+                      type: string
+                  type: object
+                type: array
+              vpc_uuid:
+                type: string
+            required:
+            - image
+            - name
+            - region
+            - secret
+            - size
+            type: object
+          status:
+            description: InstanceStatus defines the observed state of Instance
+            properties:
+              instanceID:
+                type: integer
+              message:
+                type: string
+              privateIP:
+                type: string
+              publicIP:
+                type: string
+              status:
+                type: string
+            required:
+            - instanceID
+            - message
+            - privateIP
+            - publicIP
+            - status
+            type: object
+        type: object
     served: true
     storage: true
+    subresources: {}
 status:
   acceptedNames:
     kind: ""
